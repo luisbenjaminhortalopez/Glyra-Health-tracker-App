@@ -135,7 +135,7 @@ const SettingsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.lg, paddingBottom: spacing.xl * 2 },
+  content: { padding: spacing.lg, paddingTop: spacing.lg + 80, paddingBottom: spacing.xl * 2 },
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginBottom: spacing.md },
   title: { fontFamily: fontFamily.bold, fontSize: fontSize.header, color: colors.text.primary },
   section: { marginBottom: spacing.lg },

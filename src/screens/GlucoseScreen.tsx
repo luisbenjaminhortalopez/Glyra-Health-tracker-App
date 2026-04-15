@@ -25,8 +25,8 @@ import { colors, spacing, fontSize, fontFamily, borderRadius } from '../theme';
 import type { GlucoseInput } from '../types';
 
 const columns: ColumnDef[] = [
-  { key: 'date', label: 'Fecha', width: 100 },
-  { key: 'valor', label: 'Valor', width: 100 },
+  { key: 'date', label: 'Fecha', width: 90 },
+  { key: 'valor', label: 'mg/dL', width: 50 },
   { key: 'classification', label: 'Clasificación' },
 ];
 
@@ -205,14 +205,23 @@ const GlucoseScreen: React.FC<{ navigation?: any }> = () => {
   // Prepare table data
   const tableData = filteredRecords.map((r) => ({
     id: r.id,
-    date: r.date,
-    valor: `${Math.round(r.valueMgdl)} mg/dL`,
+    date: `${r.date.slice(8,10)}-${r.date.slice(5,7)}-${r.date.slice(2,4)}`,
+    valor: `${Math.round(r.valueMgdl)}`,
     classification: r.classification,
   }));
 
   // Chart data
   const chartData = filteredRecords.map((r) => r.valueMgdl);
-  const chartLabels = filteredRecords.map((r) => r.date.slice(5)); // MM-DD
+  const rawLabels = filteredRecords.map((r) => r.date.slice(8)); // DD only
+  // Show label every 3rd day when more than 10 records
+  const chartLabels = chartData.length > 10
+    ? rawLabels.map((l, i) => i % 3 === 0 ? l : '')
+    : rawLabels;
+  // Y axis: default 50-225, expand if data exceeds
+  const dataMin = chartData.length > 0 ? Math.min(...chartData) : 50;
+  const dataMax = chartData.length > 0 ? Math.max(...chartData) : 225;
+  const chartYMin = Math.min(50, dataMin);
+  const chartYMax = Math.max(225, dataMax);
 
   // Form fields renderer (shared between register and edit modals)
   const renderFormFields = () => (
@@ -295,7 +304,6 @@ const GlucoseScreen: React.FC<{ navigation?: any }> = () => {
 
       {/* Month filter */}
       <GlassCard style={styles.section}>
-        <Text style={styles.sectionTitle}>Período</Text>
         <View style={styles.monthNav}>
           <TouchableOpacity onPress={() => navigateMonth(-1)} style={styles.monthArrow}>
             <Ionicons name="chevron-back" size={22} color={colors.primary} />
@@ -339,7 +347,7 @@ const GlucoseScreen: React.FC<{ navigation?: any }> = () => {
       {chartData.length > 0 && (
         <GlassCard style={styles.section}>
           <Text style={styles.sectionTitle}>Picos de glucosa</Text>
-          <SimpleChart data={chartData} labels={chartLabels} />
+          <SimpleChart data={chartData} labels={chartLabels} yMin={chartYMin} yMax={chartYMax} />
         </GlassCard>
       )}
 
@@ -393,6 +401,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: spacing.lg,
+    paddingTop: spacing.lg + 80,
     paddingBottom: spacing.xl * 2,
   },
   title: {

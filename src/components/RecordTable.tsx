@@ -30,11 +30,11 @@ const RecordTable: React.FC<RecordTableProps> = ({ columns, data, onRowPress }) 
         <View style={styles.headerRow}>
           {columns.map((col) => (
             <View key={col.key} style={[styles.headerCell, col.width ? { flex: 0, width: col.width } : { flex: 1, minWidth: 80 }]}>
-              <Text style={styles.headerText} numberOfLines={2}>{col.label}</Text>
+              <Text style={styles.headerText} numberOfLines={1}>{col.label}</Text>
             </View>
           ))}
         </View>
-        <ScrollView style={styles.body} nestedScrollEnabled>
+        <ScrollView style={styles.body} nestedScrollEnabled showsVerticalScrollIndicator={false}>
           {data.map((row, index) => (
             <TouchableOpacity
               key={index}
@@ -49,7 +49,7 @@ const RecordTable: React.FC<RecordTableProps> = ({ columns, data, onRowPress }) 
                   ) : col.isIcon ? (
                     <Ionicons name={String(row[col.key] ?? '') as any} size={20} color={colors.primary} />
                   ) : (
-                    <Text style={styles.dataText} numberOfLines={2}>{String(row[col.key] ?? '')}</Text>
+                    <Text style={styles.dataText} numberOfLines={1}>{String(row[col.key] ?? '')}</Text>
                   )}
                 </View>
               ))}

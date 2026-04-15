@@ -196,14 +196,17 @@ const BloodPressureScreen: React.FC<{ navigation?: any }> = () => {
   // Prepare table data
   const tableData = filteredRecords.map((r) => ({
     id: r.id,
-    date: r.date,
+    date: `${r.date.slice(8,10)}-${r.date.slice(5,7)}-${r.date.slice(2,4)}`,
     bp: `${r.systolic}/${r.diastolic}`,
     pulse: `${r.pulse} bpm`,
   }));
 
   // Chart data (systolic trend)
   const chartData = filteredRecords.map((r) => r.systolic);
-  const chartLabels = filteredRecords.map((r) => r.date.slice(5)); // MM-DD
+  const rawBPLabels = filteredRecords.map((r) => r.date.slice(8));
+  const chartLabels = chartData.length > 10
+    ? rawBPLabels.map((l, i) => i % 3 === 0 ? l : '')
+    : rawBPLabels;
 
   const isFormValid = form.systolic && form.diastolic && form.pulse;
 
@@ -281,7 +284,6 @@ const BloodPressureScreen: React.FC<{ navigation?: any }> = () => {
 
       {/* Month filter */}
       <GlassCard style={styles.section}>
-        <Text style={styles.sectionTitle}>Período</Text>
         <View style={styles.monthNav}>
           <TouchableOpacity onPress={() => navigateMonth(-1)} style={styles.monthArrow}>
             <Ionicons name="chevron-back" size={22} color={colors.primary} />
@@ -381,6 +383,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: spacing.lg,
+    paddingTop: spacing.lg + 80,
     paddingBottom: spacing.xl * 2,
   },
   title: {

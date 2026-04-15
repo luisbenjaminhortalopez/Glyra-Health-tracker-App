@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   card: {
     minWidth: 100,
     flex: 1,
+    backgroundColor: '#FFFFFF',
   },
   label: {
     fontFamily: fontFamily.regular,

@@ -6,9 +6,11 @@ import { colors, spacing, borderRadius } from '../theme';
 interface SimpleChartProps {
   data: number[];
   labels?: string[];
+  yMin?: number;
+  yMax?: number;
 }
 
-const SimpleChart: React.FC<SimpleChartProps> = ({ data, labels }) => {
+const SimpleChart: React.FC<SimpleChartProps> = ({ data, labels, yMin, yMax }) => {
   const screenWidth = Dimensions.get('window').width;
   const chartWidth = screenWidth - spacing.lg * 2;
 
@@ -21,7 +23,11 @@ const SimpleChart: React.FC<SimpleChartProps> = ({ data, labels }) => {
       <LineChart
         data={{
           labels: labels ?? data.map(() => ''),
-          datasets: [{ data }],
+          datasets: [
+            { data },
+            ...(yMin !== undefined ? [{ data: [yMin], withDots: false }] : []),
+            ...(yMax !== undefined ? [{ data: [yMax], withDots: false }] : []),
+          ],
         }}
         width={chartWidth}
         height={180}

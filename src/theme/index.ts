@@ -97,7 +97,7 @@ export const glassmorphism = StyleSheet.create({
         shadowRadius: 16,
       },
     }),
-    overflow: 'hidden',
+    overflow: 'visible',
   },
   button: {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',

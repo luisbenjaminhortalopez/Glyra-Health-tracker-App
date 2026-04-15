@@ -153,7 +153,7 @@ const ExerciseScreen: React.FC<{ navigation?: any }> = () => {
 
   const tableData = records.filter((r) => r.date.startsWith(monthFilter)).map((r) => ({
     id: r.id,
-    date: r.date,
+    date: `${r.date.slice(8,10)}-${r.date.slice(5,7)}-${r.date.slice(2,4)}`,
     exerciseType: r.exerciseType,
     duration: `${r.durationMinutes}`,
   }));
@@ -161,7 +161,10 @@ const ExerciseScreen: React.FC<{ navigation?: any }> = () => {
   const filteredForChart = records.filter((r) => r.date.startsWith(monthFilter));
   const dailyTotals = getDailyTotals(60).filter((d) => d.date.startsWith(monthFilter));
   const chartData = dailyTotals.map((d) => d.total);
-  const chartLabels = dailyTotals.map((d) => d.date.slice(5));
+  const rawExLabels = dailyTotals.map((d) => d.date.slice(8));
+  const chartLabels = chartData.length > 10
+    ? rawExLabels.map((l, i) => i % 3 === 0 ? l : '')
+    : rawExLabels;
 
   const renderDropdown = () => (
     <View>
@@ -238,7 +241,6 @@ const ExerciseScreen: React.FC<{ navigation?: any }> = () => {
 
       {/* Month filter */}
       <GlassCard style={styles.section}>
-        <Text style={styles.sectionTitle}>Período</Text>
         <View style={styles.monthNav}>
           <TouchableOpacity onPress={() => navigateMonth(-1)} style={styles.monthArrow}>
             <Ionicons name="chevron-back" size={22} color={colors.primary} />
@@ -280,7 +282,7 @@ const ExerciseScreen: React.FC<{ navigation?: any }> = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
-  contentContainer: { padding: spacing.lg, paddingBottom: spacing.xl * 2 },
+  contentContainer: { padding: spacing.lg, paddingTop: spacing.lg + 80, paddingBottom: spacing.xl * 2 },
   title: { fontFamily: fontFamily.bold, fontSize: fontSize.header, color: colors.text.primary },
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginBottom: spacing.md },
   registerButton: { marginBottom: spacing.md },
