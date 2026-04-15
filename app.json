@@ -22,11 +22,13 @@
         "foregroundImage": "./assets/AppIcon.png",
         "backgroundColor": "#E8EFF9"
       },
-      "package": "com.healthtracker.app",
-      "minSdkVersion": 26
+      "package": "com.healthtrackerapp"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      "@react-native-community/datetimepicker",
+      "expo-asset",
+      "expo-sqlite"
     ],
     "extra": {
       "eas": {
