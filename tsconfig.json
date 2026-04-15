@@ -1,0 +1,20 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@screens/*": ["src/screens/*"],
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@types/*": ["src/types/*"],
+      "@theme": ["src/theme/index.ts"],
+      "@theme/*": ["src/theme/*"]
+    }
+  },
+  "include": ["src/**/*", "App.tsx", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "backend", "android", "ios"]
+}

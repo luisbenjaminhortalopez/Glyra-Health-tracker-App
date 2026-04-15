@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "28255709598",
+    "project_id": "glyra-health",
+    "storage_bucket": "glyra-health.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28255709598:android:02a8e6a34044d2d6730e8f",
+        "android_client_info": {
+          "package_name": "com.healthtracker.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB372S3ScvXyewaiCOEL9kTgVvp34CLWgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
