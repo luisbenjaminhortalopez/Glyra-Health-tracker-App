@@ -9,3 +9,6 @@ local.properties
 .idea/
 .DS_Store
 *.db
+android/
+ios/
+.expo/
