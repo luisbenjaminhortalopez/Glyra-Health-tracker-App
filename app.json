@@ -27,6 +27,12 @@
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "9a1bc39a-54cd-407f-8e9a-54d4d0eddbec"
+      }
+    },
+    "owner": "lbenjamin_horta"
   }
 }
