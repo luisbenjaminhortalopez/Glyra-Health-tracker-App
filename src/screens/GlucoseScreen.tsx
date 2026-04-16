@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: spacing.lg,
-    paddingTop: spacing.lg + 80,
+    paddingTop: Platform.OS === 'android' ? spacing.lg + 44 : spacing.lg + 80,
     paddingBottom: spacing.xl * 2,
   },
   title: {
@@ -462,12 +462,12 @@ const styles = StyleSheet.create({
   switchShadow: {
     borderRadius: 16,
     ...Platform.select({
-      android: { elevation: 4 },
+      android: { elevation: 1 },
       ios: {
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
       },
     }),
   },

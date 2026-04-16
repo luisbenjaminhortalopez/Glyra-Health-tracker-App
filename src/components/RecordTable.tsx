@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, fontSize, fontFamily, glassmorphism } from '../theme';
+import { colors, spacing, fontSize, fontFamily, borderRadius } from '../theme';
 
 export interface ColumnDef {
   key: string;
@@ -63,7 +63,7 @@ const RecordTable: React.FC<RecordTableProps> = ({ columns, data, onRowPress }) 
 
 const styles = StyleSheet.create({
   container: {
-    ...glassmorphism.card,
+    borderRadius: borderRadius.medium,
     overflow: 'hidden',
     minWidth: '100%',
   },

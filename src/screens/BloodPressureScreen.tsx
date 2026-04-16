@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   RefreshControl,
+  Platform,
 } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import DateTimePicker from '../components/DateTimePicker';
@@ -22,8 +23,8 @@ import { colors, spacing, fontSize, fontFamily, borderRadius } from '../theme';
 import type { BloodPressureInput } from '../types';
 
 const columns: ColumnDef[] = [
-  { key: 'date', label: 'Fecha', width: 100 },
-  { key: 'bp', label: 'Sistólica/Diastólica', width: 120 },
+  { key: 'date', label: 'Fecha', width: 90 },
+  { key: 'bp', label: 'Valor', width: 70 },
   { key: 'pulse', label: 'Pulso' },
 ];
 
@@ -383,7 +384,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: spacing.lg,
-    paddingTop: spacing.lg + 80,
+    paddingTop: Platform.OS === 'android' ? spacing.lg + 44 : spacing.lg + 80,
     paddingBottom: spacing.xl * 2,
   },
   title: {

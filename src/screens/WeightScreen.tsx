@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   RefreshControl,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker from '../components/DateTimePicker';
@@ -343,7 +344,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: spacing.lg,
-    paddingTop: spacing.lg + 80,
+    paddingTop: Platform.OS === 'android' ? spacing.lg + 44 : spacing.lg + 80,
     paddingBottom: spacing.xl * 2,
   },
   title: {

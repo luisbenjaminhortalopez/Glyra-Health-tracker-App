@@ -17,8 +17,8 @@ export const colors = {
     yellow: '#F59E0B',
   },
   glass: {
-    background: 'rgba(255, 255, 255, 0.55)',
-    border: 'rgba(255, 255, 255, 0.6)',
+    background: Platform.OS === 'android' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.55)',
+    border: Platform.OS === 'android' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.6)',
     shadow: 'rgba(0, 0, 0, 0.08)',
   },
   classification: {
@@ -70,7 +70,7 @@ export const glassmorphism = StyleSheet.create({
     borderColor: colors.glass.border,
     ...Platform.select({
       android: {
-        elevation: 10,
+        elevation: 6,
       },
       ios: {
         shadowColor: '#000',

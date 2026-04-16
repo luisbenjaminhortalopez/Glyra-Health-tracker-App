@@ -35,7 +35,7 @@ const AuthScreen: React.FC = () => {
       <Text style={s.fieldLabel}>{label}</Text>
       <View style={s.passRow}>
         <TextInput style={s.passInput} value={val} onChangeText={set}
-          placeholder="••••••" placeholderTextColor="rgba(255,255,255,0.4)" secureTextEntry={!show} />
+          placeholder="••••••••" placeholderTextColor="rgba(255,255,255,0.4)" secureTextEntry={!show} />
         <TouchableOpacity onPress={toggle} style={s.eyeBtn}>
           <Ionicons name={show ? 'eye-off-outline' : 'eye-outline'} size={20} color="rgba(255,255,255,0.6)" />
         </TouchableOpacity>
@@ -58,7 +58,7 @@ const AuthScreen: React.FC = () => {
 
               <Text style={s.fieldLabel}>Correo electrónico</Text>
               <TextInput style={s.input} value={email} onChangeText={setEmail}
-                placeholder="[email]" placeholderTextColor="rgba(255,255,255,0.4)"
+                placeholder="Correo" placeholderTextColor="rgba(255,255,255,0.4)"
                 keyboardType="email-address" autoCapitalize="none" />
 
               {renderPassField('Contraseña', password, setPassword, showPass, () => setShowPass(!showPass))}
