@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { ActivityIndicator, View, StyleSheet, Text, TextInput } from 'react-native';
 import {
   useFonts,
   NunitoSans_400Regular,
@@ -9,6 +9,15 @@ import { useAuth } from './src/hooks/useAuth';
 import AppNavigator from './src/navigation/AppNavigator';
 import AuthScreen from './src/screens/AuthScreen';
 import { colors } from './src/theme';
+
+// Disable font scaling from system settings
+if ((Text as any).defaultProps == null) (Text as any).defaultProps = {};
+(Text as any).defaultProps.allowFontScaling = false;
+(Text as any).defaultProps.maxFontSizeMultiplier = 1;
+
+if ((TextInput as any).defaultProps == null) (TextInput as any).defaultProps = {};
+(TextInput as any).defaultProps.allowFontScaling = false;
+(TextInput as any).defaultProps.maxFontSizeMultiplier = 1;
 
 const App: React.FC = () => {
   const [fontsLoaded] = useFonts({

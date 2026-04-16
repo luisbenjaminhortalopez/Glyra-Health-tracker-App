@@ -25,11 +25,12 @@ const GlassModal: React.FC<GlassModalProps> = ({ visible, onClose, title, childr
   const maxContentHeight = height * 0.75;
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
       <Pressable style={styles.overlay} onPress={onClose}>
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'padding'}
           style={styles.avoidingView}
+          keyboardVerticalOffset={Platform.OS === 'android' ? -100 : 0}
         >
           <Pressable style={[glassmorphism.modal, styles.container]} onPress={(e) => e.stopPropagation()}>
             <View style={styles.titleBar}>

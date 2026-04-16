@@ -7,7 +7,7 @@ const DAY_MAP: Record<string, number> = {
   thursday: 5, friday: 6, saturday: 7,
 };
 
-const CHANNEL_ID = 'medication-reminders';
+const CHANNEL_ID = 'medication-reminders-v2';
 
 export async function requestPermissions(): Promise<boolean> {
   const { status } = await Notifications.requestPermissionsAsync();
@@ -19,7 +19,7 @@ export async function configureNotifications() {
     await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
       name: 'Recordatorios de medicación',
       importance: Notifications.AndroidImportance.HIGH,
-      sound: 'notification', // archivo en android/app/src/main/res/raw/notification.mp3
+      sound: 'notificacion',
       vibrationPattern: [0, 250, 250, 250],
     });
   }
@@ -29,6 +29,7 @@ export async function configureNotifications() {
       shouldShowAlert: true,
       shouldPlaySound: true,
       shouldSetBadge: false,
+      priority: Notifications.AndroidNotificationPriority.HIGH,
     }),
   });
 }
@@ -55,7 +56,7 @@ export async function scheduleMedicationNotifications(med: MedicationRecord): Pr
         content: {
           title: `💊 ${med.name}`,
           body: `Es hora de tomar tu ${med.type.toLowerCase()}: ${med.name}`,
-          sound: 'notification',
+          sound: 'notificacion',
           data: { medicationId: med.id },
         },
         trigger: {

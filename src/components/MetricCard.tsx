@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import GlassCard from './GlassCard';
-import { colors, spacing, fontSize, fontFamily } from '../theme';
+import { colors, spacing, fontSize, fontFamily, borderRadius } from '../theme';
 
 interface MetricCardProps {
   label: string;
@@ -24,7 +23,7 @@ const trendColors: Record<string, string> = {
 
 const MetricCard: React.FC<MetricCardProps> = ({ label, value, unit, trend }) => {
   return (
-    <GlassCard style={styles.card}>
+    <View style={styles.card}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.valueRow}>
         <Text style={styles.value}>{value}</Text>
@@ -35,7 +34,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ label, value, unit, trend }) =>
           </Text>
         ) : null}
       </View>
-    </GlassCard>
+    </View>
   );
 };
 
@@ -43,7 +42,9 @@ const styles = StyleSheet.create({
   card: {
     minWidth: 100,
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    padding: spacing.sm,
+    borderRadius: borderRadius.small,
+    backgroundColor: 'transparent',
   },
   label: {
     fontFamily: fontFamily.regular,

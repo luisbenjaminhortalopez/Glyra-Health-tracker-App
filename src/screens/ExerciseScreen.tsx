@@ -282,7 +282,7 @@ const ExerciseScreen: React.FC<{ navigation?: any }> = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
-  contentContainer: { padding: spacing.lg, paddingTop: Platform.OS === 'android' ? spacing.lg + 44 : spacing.lg + 80, paddingBottom: spacing.xl * 2 },
+  contentContainer: { padding: spacing.lg, paddingTop: Platform.OS === 'android' ? spacing.lg + 60 : spacing.lg + 80, paddingBottom: spacing.xl * 2 },
   title: { fontFamily: fontFamily.bold, fontSize: fontSize.header, color: colors.text.primary },
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginBottom: spacing.md },
   registerButton: { marginBottom: spacing.md },

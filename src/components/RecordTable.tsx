@@ -29,7 +29,7 @@ const RecordTable: React.FC<RecordTableProps> = ({ columns, data, onRowPress }) 
       <View style={styles.container}>
         <View style={styles.headerRow}>
           {columns.map((col) => (
-            <View key={col.key} style={[styles.headerCell, col.width ? { flex: 0, width: col.width } : { flex: 1, minWidth: 80 }]}>
+            <View key={col.key} style={[styles.headerCell, col.width ? { flex: 0, width: col.width } : { flex: 0, minWidth: 110 }]}>
               <Text style={styles.headerText} numberOfLines={1}>{col.label}</Text>
             </View>
           ))}
@@ -43,7 +43,7 @@ const RecordTable: React.FC<RecordTableProps> = ({ columns, data, onRowPress }) 
               activeOpacity={0.6}
             >
               {columns.map((col) => (
-                <View key={col.key} style={[styles.dataCell, col.width ? { flex: 0, width: col.width } : { flex: 1, minWidth: 80 }]}>
+                <View key={col.key} style={[styles.dataCell, col.width ? { flex: 0, width: col.width } : { flex: 0, minWidth: 110 }]}>
                   {col.renderCell ? (
                     col.renderCell(row[col.key])
                   ) : col.isIcon ? (

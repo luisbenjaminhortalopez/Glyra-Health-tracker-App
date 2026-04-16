@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: spacing.lg,
-    paddingTop: Platform.OS === 'android' ? spacing.lg + 44 : spacing.lg + 80,
+    paddingTop: Platform.OS === 'android' ? spacing.lg + 60 : spacing.lg + 80,
     paddingBottom: spacing.xl * 2,
   },
   title: {
