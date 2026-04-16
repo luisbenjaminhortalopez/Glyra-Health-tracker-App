@@ -31,7 +31,7 @@ function getSignInError(code: string): string {
 function getSignUpError(code: string): string {
   switch (code) {
     case 'auth/email-already-in-use':
-      return 'Esta cuenta ya existe. Intenta iniciar sesión.';
+      return 'Este Email ya está asociado a una cuenta.';
     case 'auth/invalid-email':
       return 'El formato del correo no es válido.';
     case 'auth/weak-password':
