@@ -22,8 +22,7 @@
         "foregroundImage": "./assets/AppIcon.png",
         "backgroundColor": "#E8EFF9"
       },
-      "package": "com.healthtracker.app",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.healthtracker.app"
     },
     "plugins": [
       "expo-font",
@@ -35,7 +34,7 @@
         {
           "sounds": ["./assets/notification.mp3"]
         }
-      ],
+      ]
     ],
     "extra": {
       "eas": {

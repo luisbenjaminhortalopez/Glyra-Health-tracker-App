@@ -1,0 +1,47 @@
+export default {
+  expo: {
+    name: "Health Tracker",
+    slug: "health-tracker-app",
+    version: "1.0.0",
+    orientation: "portrait",
+    icon: "./assets/AppIcon.png",
+    userInterfaceStyle: "light",
+    newArchEnabled: true,
+    jsEngine: "hermes",
+    splash: {
+      image: "./assets/AppIcon.png",
+      resizeMode: "contain",
+      backgroundColor: "#E8EFF9",
+    },
+    ios: {
+      supportsTablet: true,
+      bundleIdentifier: "com.healthtracker.app",
+    },
+    android: {
+      adaptiveIcon: {
+        foregroundImage: "./assets/AppIcon.png",
+        backgroundColor: "#E8EFF9",
+      },
+      package: "com.healthtracker.app",
+      googleServicesFile: process.env.GOOGLE_SERVICES_JSON || "./google-services.json",
+    },
+    plugins: [
+      "expo-font",
+      "@react-native-community/datetimepicker",
+      "expo-asset",
+      "expo-sqlite",
+      [
+        "expo-notifications",
+        {
+          sounds: ["./assets/notification.mp3"],
+        },
+      ],
+    ],
+    extra: {
+      eas: {
+        projectId: "9a1bc39a-54cd-407f-8e9a-54d4d0eddbec",
+      },
+    },
+    owner: "lbenjamin_horta",
+  },
+};
