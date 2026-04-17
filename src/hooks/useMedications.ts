@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { getDatabase } from '../db/database';
 import { scheduleMedicationNotifications, cancelMedicationNotifications } from '../services/notifications';
+import { syncRecord } from '../services/cloudSync';
 import type { MedicationRecord, MedicationInput } from '../types';
 
 const DAY_KEYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -51,7 +52,14 @@ export function useMedications() {
          input.endDate ?? null, ...DAY_KEYS.map(k => input.days[k] ? 1 : 0)]
       );
       const med = fetchById(result.lastInsertRowId);
-      if (med) await scheduleMedicationNotifications(med);
+      if (med) {
+        await scheduleMedicationNotifications(med);
+        syncRecord('medications', 'add', {
+          name: input.name, type: input.type, frequency: input.frequency,
+          frequencyHours: input.frequencyHours, startTime: input.startTime,
+          endDate: input.endDate ?? null, active: true, days: input.days,
+        });
+      }
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error');

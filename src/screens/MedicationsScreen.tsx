@@ -28,8 +28,8 @@ const getNow = (): string => {
 };
 
 const emptyDays = (): Record<string, boolean> => ({
-  monday: false, tuesday: false, wednesday: false, thursday: false,
-  friday: false, saturday: false, sunday: false,
+  monday: true, tuesday: true, wednesday: true, thursday: true,
+  friday: true, saturday: true, sunday: true,
 });
 
 const getToday = (): string => {
@@ -53,6 +53,7 @@ const MedicationsScreen: React.FC<{ navigation?: any }> = () => {
   const [typeDropdown, setTypeDropdown] = useState(false);
   const [freqDropdown, setFreqDropdown] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [hasEndDate, setHasEndDate] = useState(false);
 
   useEffect(() => {
     configureNotifications();
@@ -62,7 +63,7 @@ const MedicationsScreen: React.FC<{ navigation?: any }> = () => {
 
   const onRefresh = useCallback(() => { setRefreshing(true); fetchRecords(); setRefreshing(false); }, [fetchRecords]);
 
-  const openRegister = () => { setForm(emptyForm()); setRegisterVisible(true); };
+  const openRegister = () => { setForm(emptyForm()); setHasEndDate(false); setRegisterVisible(true); };
 
   const handleMedPress = (med: any) => {
     const record = fetchById(med.id);
@@ -72,6 +73,7 @@ const MedicationsScreen: React.FC<{ navigation?: any }> = () => {
         name: record.name, type: record.type, frequency: record.frequency,
         startTime: record.startTime, endDate: record.endDate ?? '', days: { ...record.days },
       });
+      setHasEndDate(!!record.endDate);
       setEditVisible(true);
     }
   };
@@ -82,7 +84,7 @@ const MedicationsScreen: React.FC<{ navigation?: any }> = () => {
     return {
       name: form.name.trim(), type: form.type, frequency: form.frequency,
       frequencyHours: freq?.hours ?? 24, startTime: form.startTime,
-      endDate: form.endDate || undefined, days: form.days,
+      endDate: hasEndDate && form.endDate ? form.endDate : undefined, days: form.days,
     };
   };
 
@@ -175,20 +177,29 @@ const MedicationsScreen: React.FC<{ navigation?: any }> = () => {
       <Text style={styles.fieldLabel}>Días de la semana</Text>
       <WeekDayChips days={form.days} onToggle={(k) => setForm({ ...form, days: { ...form.days, [k]: !form.days[k] } })} />
 
-      <DateTimePicker
-        label="Fin del tratamiento (opcional)"
-        value={form.endDate || getToday()}
-        mode="date"
-        allowFuture
-        onChange={(v) => { setForm({ ...form, endDate: v }); setActivePicker(null); }}
-        isOpen={activePicker === 'endDate'}
-        onOpen={() => { setActivePicker(activePicker === 'endDate' ? null : 'endDate'); setTypeDropdown(false); setFreqDropdown(false); }}
-      />
-      {form.endDate ? (
-        <TouchableOpacity onPress={() => setForm({ ...form, endDate: '' })} style={{ marginTop: 4 }}>
-          <Text style={{ fontFamily: fontFamily.regular, fontSize: fontSize.small, color: colors.primary }}>Quitar fecha de fin</Text>
+      <View style={styles.checkboxRow}>
+        <TouchableOpacity
+          style={[styles.checkbox, hasEndDate && styles.checkboxActive]}
+          onPress={() => { setHasEndDate(!hasEndDate); if (!hasEndDate && !form.endDate) setForm({ ...form, endDate: getToday() }); }}
+        >
+          {hasEndDate && <Ionicons name="checkmark" size={16} color="#FFFFFF" />}
         </TouchableOpacity>
-      ) : null}
+        <Text style={styles.fieldLabel} onPress={() => { setHasEndDate(!hasEndDate); if (!hasEndDate && !form.endDate) setForm({ ...form, endDate: getToday() }); }}>
+          Tiene fin de tratamiento
+        </Text>
+      </View>
+
+      {hasEndDate && (
+        <DateTimePicker
+          label="Fecha de fin"
+          value={form.endDate || getToday()}
+          mode="date"
+          allowFuture
+          onChange={(v) => { setForm({ ...form, endDate: v }); setActivePicker(null); }}
+          isOpen={activePicker === 'endDate'}
+          onOpen={() => { setActivePicker(activePicker === 'endDate' ? null : 'endDate'); setTypeDropdown(false); setFreqDropdown(false); }}
+        />
+      )}
     </View>
   );
 
@@ -283,6 +294,12 @@ const styles = StyleSheet.create({
   modalButton: { marginTop: spacing.md },
   editActions: { marginTop: spacing.md, gap: spacing.sm },
   deleteButton: { backgroundColor: colors.error },
+  checkboxRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginTop: spacing.md },
+  checkbox: {
+    width: 24, height: 24, borderRadius: 6, borderWidth: 2, borderColor: '#D1D5DB',
+    alignItems: 'center', justifyContent: 'center', backgroundColor: '#F3F4F6',
+  },
+  checkboxActive: { backgroundColor: colors.primary, borderColor: colors.primary },
 });
 
 export default MedicationsScreen;
