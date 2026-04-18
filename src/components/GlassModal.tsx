@@ -44,7 +44,7 @@ const GlassModal: React.FC<GlassModalProps> = ({ visible, onClose, title, childr
               keyboardShouldPersistTaps="handled"
               bounces={false}
               showsVerticalScrollIndicator={false}
-              style={{ maxHeight: maxContentHeight, overflow: 'visible' }}
+              style={{ maxHeight: maxContentHeight }}
             >
               {children}
             </ScrollView>

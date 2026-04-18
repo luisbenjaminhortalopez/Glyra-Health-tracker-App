@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     }),
   },
   gradient: {
-    height: 90,
+    height: 105,
     borderRadius: borderRadius.large,
     overflow: 'hidden',
   },

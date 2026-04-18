@@ -9,15 +9,21 @@ interface GlassCardProps {
 }
 
 const GlassCard: React.FC<GlassCardProps> = ({ children, style }) => {
+  if (Platform.OS === 'android') {
+    return (
+      <View style={[glassmorphism.card, { padding: spacing.md }, style]}>
+        {children}
+      </View>
+    );
+  }
+
   return (
     <View style={[glassmorphism.card, styles.container, style]}>
-      {Platform.OS === 'ios' && (
-        <BlurView
-          style={StyleSheet.absoluteFill}
-          tint={blurConfig.blurType}
-          intensity={blurConfig.blurAmount * 4}
-        />
-      )}
+      <BlurView
+        style={StyleSheet.absoluteFill}
+        tint={blurConfig.blurType}
+        intensity={blurConfig.blurAmount * 4}
+      />
       <View style={styles.content}>{children}</View>
     </View>
   );

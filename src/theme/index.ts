@@ -17,8 +17,8 @@ export const colors = {
     yellow: '#F59E0B',
   },
   glass: {
-    background: Platform.OS === 'android' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.55)',
-    border: Platform.OS === 'android' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.6)',
+    background: Platform.OS === 'android' ? '#F0F4FA' : 'rgba(255, 255, 255, 0.55)',
+    border: Platform.OS === 'android' ? '#E2E8F0' : 'rgba(255, 255, 255, 0.6)',
     shadow: 'rgba(0, 0, 0, 0.08)',
   },
   classification: {
@@ -97,7 +97,7 @@ export const glassmorphism = StyleSheet.create({
         shadowRadius: 16,
       },
     }),
-    overflow: 'visible',
+    overflow: 'hidden',
   },
   button: {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
